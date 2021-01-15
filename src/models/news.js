@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
-const moment = require ('moment');
 
 const News = mongoose.model('News', {
     description: {
         type: String,
+        trim: true
     },
     title: {
         type: String,
@@ -15,15 +15,18 @@ const News = mongoose.model('News', {
         type: String,
         trim : true,  
         required: true,
-        uppercase: true,                   
+        lowercase: true,                   
       },
       date:{
         type:Date,
         trim : true,
-        default:function(){
-          return moment().add(2,'hour')
+        default: new Date()
         }
-    }
-})
+    })
+
+Date.prototype.addHours = function() {
+  this.setTime(this.getTime() + 2);
+  return this;
+}
 
 module.exports = News
