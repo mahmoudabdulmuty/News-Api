@@ -20,13 +20,13 @@ const News = mongoose.model('News', {
       date:{
         type:Date,
         trim : true,
-        default: new Date()
+        default: new Date().addHours(2)
         }
     })
 
-Date.prototype.addHours = function() {
-  this.setTime(this.getTime() + 2);
-  return this;
+Date.prototype.addHours= function(h){
+    this.setHours(this.getHours()+h);
+    return this;
 }
 
 module.exports = News
